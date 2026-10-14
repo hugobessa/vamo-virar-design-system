@@ -1,7 +1,7 @@
 {
   "name": "@vamo-virar/design-system",
   "version": "0.1.0",
-  "description": "Vamo Virar design system: colour, type and motion tokens, brand marks and React Native components (web via react-native-web).",
+  "description": "Vamo Virar design system: colour, type and motion tokens, brand marks and UI components for React Native (web via react-native-web) and for the web as shadcn/ui-style components (Radix + Tailwind CSS).",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -22,6 +22,12 @@
       "types": "./dist/tokens.d.ts",
       "default": "./dist/tokens.js"
     },
+    "./web": {
+      "types": "./dist/web/index.d.ts",
+      "default": "./dist/web/index.js"
+    },
+    "./web/styles.css": "./dist/web/styles.css",
+    "./web/theme.css": "./dist/web/theme.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -30,23 +36,42 @@
     "!src/stories",
     "!src/**/*.test.ts"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/web/theme.css dist/web/theme.css && tailwindcss -i src/web/styles.css -o dist/web/styles.css --minify",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist-storybook",
     "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "~1.49.0",
+    "radix-ui": "~1.6.7",
+    "tailwind-merge": "~3.7.0"
+  },
   "peerDependencies": {
     "expo-haptics": "*",
     "react": ">=19",
+    "react-dom": ">=19",
     "react-native": ">=0.79",
     "react-native-safe-area-context": ">=5"
   },
   "peerDependenciesMeta": {
     "expo-haptics": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-safe-area-context": {
       "optional": true
     }
   },
@@ -54,6 +79,8 @@
     "@storybook/addon-a11y": "^10.6.1",
     "@storybook/addon-docs": "^10.6.1",
     "@storybook/react-native-web-vite": "^10.6.1",
+    "@tailwindcss/cli": "~4.3.3",
+    "@tailwindcss/vite": "~4.3.3",
     "@types/react": "~19.2.2",
     "@types/react-dom": "~19.2.7",
     "@vitejs/plugin-react": "^5.2.0",
@@ -64,6 +91,7 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-web": "^0.21.2",
     "storybook": "^10.6.1",
+    "tailwindcss": "~4.3.3",
     "typescript": "~5.9.3",
     "vite": "^7.3.7",
     "vitest": "3.2.4"

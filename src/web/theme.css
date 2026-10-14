@@ -1,0 +1,304 @@
+/*
+ * Vamo Virar theme for Tailwind CSS v4 and shadcn/ui.
+ *
+ * Import it after Tailwind in your stylesheet:
+ *
+ *   @import "tailwindcss";
+ *   @import "@vamo-virar/design-system/web/theme.css";
+ *   @source "../node_modules/@vamo-virar/design-system/dist/web";
+ *
+ * The values mirror src/tokens.ts (a unit test keeps them in step). On top of
+ * the brand tokens (--vv-*), it fills in shadcn's variables (--background,
+ * --primary, ...) so components added with the shadcn CLI use the brand too.
+ *
+ * Colour scheme: light by default, dark when the system asks for it, and a
+ * `.dark` or `.light` class forces either for its subtree (shadcn convention).
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Animations switch off when the system asks for less motion, or inside data-reduced-motion="true". */
+@custom-variant motion-off {
+  @media (prefers-reduced-motion: reduce) {
+    @slot;
+  }
+  &:where([data-reduced-motion="true"], [data-reduced-motion="true"] *) {
+    @slot;
+  }
+}
+
+:root,
+.light {
+  --vv-bg: #FFFFFF;
+  --vv-surface: #F3F2F3;
+  --vv-cream: #F6EFE7;
+  --vv-text: #141414;
+  --vv-muted: #55555E;
+  --vv-border: #DDDADC;
+  --vv-primary: #0034D2;
+  --vv-primary-text: #FFFFFF;
+  --vv-accent: #FFD400;
+  --vv-accent-text: #141414;
+  --vv-brand: #FD0000;
+  --vv-brand-dark: #A20301;
+  --vv-brand-text: #FFFFFF;
+  --vv-green: #00B923;
+  --vv-green-dark: #006820;
+  --vv-ok: #006820;
+  --vv-warn: #8A5A00;
+  --vv-danger: #A20301;
+  --vv-chip: #ECE7F5;
+  --vv-focus: #A237FB;
+  --vv-band-red: #FD0000;
+  --vv-band-blue: #0034D2;
+  --vv-band-yellow: #FFD400;
+  --vv-on-band-yellow: #141414;
+  --vv-band-number: #006820;
+  --vv-frame: #141414;
+  --vv-primary-depth: #001F7D;
+  --vv-accent-depth: #C9A600;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --vv-bg: #0E0E12;
+    --vv-surface: #1A1A20;
+    --vv-cream: #15151A;
+    --vv-text: #F3F2F3;
+    --vv-muted: #A9A9B3;
+    --vv-border: #33333B;
+    --vv-primary: #7D9BFF;
+    --vv-primary-text: #0A1233;
+    --vv-accent: #FFD400;
+    --vv-accent-text: #141414;
+    --vv-brand: #FF3B3B;
+    --vv-brand-dark: #FF8A80;
+    --vv-brand-text: #FFFFFF;
+    --vv-green: #3DD65C;
+    --vv-green-dark: #6FD394;
+    --vv-ok: #6FD394;
+    --vv-warn: #F0C062;
+    --vv-danger: #FF8A80;
+    --vv-chip: #2B2638;
+    --vv-focus: #C58BFF;
+    --vv-band-red: #7A0200;
+    --vv-band-blue: #0B1F73;
+    --vv-band-yellow: #1A1A20;
+    --vv-on-band-yellow: #F3F2F3;
+    --vv-band-number: #FFD400;
+    --vv-frame: #3A3A45;
+    --vv-primary-depth: #4E6BC9;
+    --vv-accent-depth: #C9A600;
+  }
+}
+
+.dark {
+  --vv-bg: #0E0E12;
+  --vv-surface: #1A1A20;
+  --vv-cream: #15151A;
+  --vv-text: #F3F2F3;
+  --vv-muted: #A9A9B3;
+  --vv-border: #33333B;
+  --vv-primary: #7D9BFF;
+  --vv-primary-text: #0A1233;
+  --vv-accent: #FFD400;
+  --vv-accent-text: #141414;
+  --vv-brand: #FF3B3B;
+  --vv-brand-dark: #FF8A80;
+  --vv-brand-text: #FFFFFF;
+  --vv-green: #3DD65C;
+  --vv-green-dark: #6FD394;
+  --vv-ok: #6FD394;
+  --vv-warn: #F0C062;
+  --vv-danger: #FF8A80;
+  --vv-chip: #2B2638;
+  --vv-focus: #C58BFF;
+  --vv-band-red: #7A0200;
+  --vv-band-blue: #0B1F73;
+  --vv-band-yellow: #1A1A20;
+  --vv-on-band-yellow: #F3F2F3;
+  --vv-band-number: #FFD400;
+  --vv-frame: #3A3A45;
+  --vv-primary-depth: #4E6BC9;
+  --vv-accent-depth: #C9A600;
+}
+
+/* shadcn/ui variables, resolved per scheme. Red never fills a call to action:
+   --primary is blue, and the yellow CTA is --highlight (shadcn's --accent is
+   the quiet hover surface its own components expect). */
+:root,
+.light,
+.dark {
+  --radius: 0.75rem;
+  --background: var(--vv-bg);
+  --foreground: var(--vv-text);
+  --card: var(--vv-surface);
+  --card-foreground: var(--vv-text);
+  --popover: var(--vv-bg);
+  --popover-foreground: var(--vv-text);
+  --primary: var(--vv-primary);
+  --primary-foreground: var(--vv-primary-text);
+  --secondary: var(--vv-surface);
+  --secondary-foreground: var(--vv-text);
+  --muted: var(--vv-surface);
+  --muted-foreground: var(--vv-muted);
+  --accent: var(--vv-chip);
+  --accent-foreground: var(--vv-text);
+  --destructive: var(--vv-danger);
+  --border: var(--vv-border);
+  --input: var(--vv-border);
+  --ring: var(--vv-focus);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand tokens that shadcn has no name for. */
+  --color-surface: var(--vv-surface);
+  --color-cream: var(--vv-cream);
+  --color-chip: var(--vv-chip);
+  --color-brand: var(--vv-brand);
+  --color-brand-dark: var(--vv-brand-dark);
+  --color-brand-foreground: var(--vv-brand-text);
+  --color-brand-green: var(--vv-green);
+  --color-brand-green-dark: var(--vv-green-dark);
+  --color-primary-depth: var(--vv-primary-depth);
+  --color-highlight: var(--vv-accent);
+  --color-highlight-foreground: var(--vv-accent-text);
+  --color-highlight-depth: var(--vv-accent-depth);
+  --color-ok: var(--vv-ok);
+  --color-warn: var(--vv-warn);
+  --color-danger: var(--vv-danger);
+  --color-band-red: var(--vv-band-red);
+  --color-band-blue: var(--vv-band-blue);
+  --color-band-yellow: var(--vv-band-yellow);
+  --color-on-band-yellow: var(--vv-on-band-yellow);
+  --color-band-number: var(--vv-band-number);
+  --color-frame: var(--vv-frame);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@theme {
+  /* Raw campaign palette, the same in both schemes (brand boxes, the flag). */
+  --color-vv-red-dark: #A20301;
+  --color-vv-red: #FD0000;
+  --color-vv-yellow: #FFD400;
+  --color-vv-green: #00B923;
+  --color-vv-green-dark: #006820;
+  --color-vv-blue: #0034D2;
+  --color-vv-off-white: #F3F2F3;
+  --color-vv-white: #FFFFFF;
+  --color-vv-cream: #F6EFE7;
+  --color-vv-purple-dark: #320D59;
+  --color-vv-purple: #A237FB;
+  --color-vv-ink: #141414;
+
+  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-condensed: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+
+  /* The React Native kit's breakpoints: medium (tablet up) and wide (two columns). */
+  --breakpoint-medium: 37.5rem;
+  --breakpoint-wide: 56.25rem;
+
+  --ease-vv-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-vv-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-vv-enter: vv-enter 320ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-toast-in: vv-toast-in 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-vv-fade-in: vv-fade-in 200ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-fade-out: vv-fade-out 200ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-sheet-in: vv-sheet-in 320ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-sheet-out: vv-sheet-out 200ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-dialog-in: vv-dialog-in 200ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-dialog-out: vv-dialog-out 200ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-vv-star: vv-star 800ms cubic-bezier(0.2, 0, 0, 1) both;
+
+  @keyframes vv-enter {
+    from {
+      opacity: 0;
+      transform: translateY(var(--vv-enter-from, 8px));
+    }
+  }
+  @keyframes vv-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  @keyframes vv-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes vv-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vv-sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes vv-sheet-out {
+    to {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes vv-dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes vv-dialog-out {
+    to {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes vv-star {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(0.2) rotate(0deg);
+    }
+    30% {
+      transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.2) rotate(calc(var(--rot) * 0.3));
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dx), var(--dy)) scale(0.6) rotate(var(--rot));
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}

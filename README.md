@@ -69,6 +69,9 @@ do sistema, e `ReducedMotionOverride` a simula.
 
 ## Storybook
 
+Publicado em https://hugobessa.github.io/vamo-virar-design-system/ a cada
+push na `main` (workflow `Storybook`, via GitHub Pages).
+
 ```sh
 npm install
 npm run storybook        # http://localhost:6006

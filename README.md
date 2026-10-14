@@ -195,10 +195,11 @@ npm run build     # gera dist/ (inclui dist/web/styles.css)
 
 1. Atualize `version` no `package.json` (`npm version patch|minor|major`).
 2. Envie a tag: `git push --follow-tags`.
-3. O workflow `Publish` confere se a tag bate com a versão e publica com
-   `npm publish --provenance`. Ele precisa do segredo `NPM_TOKEN` no
-   repositório (um token de automação do npm com acesso ao escopo
-   `@vamo-virar`).
+3. O workflow `Publish` confere se a tag bate com a versão e publica no npm
+   com [trusted publishing](https://docs.npmjs.com/trusted-publishers): o
+   npm confia no workflow `publish.yml` rodando no ambiente `npm` do GitHub,
+   então não há token guardado no repositório, e o pacote sai com
+   atestado de procedência (provenance).
 
 ## Licença
 

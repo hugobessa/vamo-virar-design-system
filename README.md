@@ -257,8 +257,8 @@ npm run build-storybook  # versão estática em dist-storybook
 ```
 
 A barra de ferramentas troca o tema (claro/escuro) e simula a preferência de
-menos movimento. Os componentes da versão web ficam na seção "Web", e os do
-shadcn/ui na seção "shadcn". As telas do app, montadas com estes componentes, continuam
+menos movimento. Os componentes da versão web e os do shadcn/ui ficam juntos
+na seção "Web"; cada página do shadcn diz de onde importar. As telas do app, montadas com estes componentes, continuam
 no Storybook do [repositório do app](https://github.com/hugobessa/vamo-virar),
 em "Telas", como exemplos de uso.
 

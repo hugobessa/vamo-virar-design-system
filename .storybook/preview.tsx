@@ -60,7 +60,7 @@ const preview: Preview = {
   parameters: {
     layout: "fullscreen",
     controls: { expanded: true },
-    options: { storySort: { order: ["Fundamentos", "Marca", "Componentes", "Web", "shadcn"] } },
+    options: { storySort: { order: ["Fundamentos", "Marca", "Componentes", "Web"] } },
   },
   decorators: [
     (Story, ctx) => {

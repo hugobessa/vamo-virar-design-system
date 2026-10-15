@@ -17,8 +17,8 @@ import { Switch } from "../../shadcn/switch";
 import { Textarea } from "../../shadcn/textarea";
 
 const meta: Meta = {
-  title: "shadcn/Formulários",
-  parameters: { layout: "padded" },
+  title: "Web/Formulários",
+  parameters: { layout: "padded", docs: { description: { component: "Componentes do shadcn/ui no estilo da campanha. Importe cada um de `@vamo-virar/design-system/shadcn/<nome>`; a API é a do shadcn." } } },
   decorators: [(Story) => <div className="flex max-w-[460px] flex-col gap-4"><Story /></div>],
 };
 export default meta;

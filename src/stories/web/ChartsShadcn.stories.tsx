@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../..
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "../../shadcn/chart";
 
 const meta: Meta = {
-  title: "shadcn/Gráficos",
+  title: "Web/Gráficos",
   parameters: {
     layout: "padded",
     docs: { description: { component: "Gráficos do shadcn/ui (recharts). As cores seguem a bandeira (azul, verde, amarelo) e depois o vermelho e o roxo da campanha: `var(--chart-1)` a `var(--chart-5)`." } },

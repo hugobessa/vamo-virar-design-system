@@ -48,8 +48,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../../shadcn/tooltip";
 import { cn } from "../../web";
 
 const meta: Meta = {
-  title: "shadcn/Sobreposições",
-  parameters: { layout: "padded" },
+  title: "Web/Sobreposições",
+  parameters: { layout: "padded", docs: { description: { component: "Componentes do shadcn/ui no estilo da campanha. Importe cada um de `@vamo-virar/design-system/shadcn/<nome>`; a API é a do shadcn." } } },
   decorators: [(Story) => <div className="flex flex-wrap items-start gap-3"><Story /></div>],
 };
 export default meta;

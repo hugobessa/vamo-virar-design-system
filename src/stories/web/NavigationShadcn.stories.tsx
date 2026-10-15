@@ -37,7 +37,7 @@ import {
 } from "../../shadcn/sidebar";
 import { FlagStripe, Wordmark } from "../../web";
 
-const meta: Meta = { title: "shadcn/Navegação", parameters: { layout: "padded" } };
+const meta: Meta = { title: "Web/Navegação", parameters: { layout: "padded", docs: { description: { component: "Componentes do shadcn/ui no estilo da campanha. Importe cada um de `@vamo-virar/design-system/shadcn/<nome>`; a API é a do shadcn." } } } };
 export default meta;
 type Story = StoryObj;
 

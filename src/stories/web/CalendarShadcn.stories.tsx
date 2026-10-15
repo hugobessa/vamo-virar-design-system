@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { Calendar } from "../../shadcn/calendar";
 
-const meta: Meta = { title: "shadcn/Calendário", parameters: { layout: "padded" } };
+const meta: Meta = { title: "Web/Calendário", parameters: { layout: "padded", docs: { description: { component: "Componentes do shadcn/ui no estilo da campanha. Importe cada um de `@vamo-virar/design-system/shadcn/<nome>`; a API é a do shadcn." } } } };
 export default meta;
 type Story = StoryObj;
 

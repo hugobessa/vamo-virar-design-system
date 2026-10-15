@@ -23,8 +23,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../shadcn/tabs";
 import { BrandBox } from "../../web";
 
 const meta: Meta = {
-  title: "shadcn/Exibição",
-  parameters: { layout: "padded" },
+  title: "Web/Exibição",
+  parameters: { layout: "padded", docs: { description: { component: "Componentes do shadcn/ui no estilo da campanha. Importe cada um de `@vamo-virar/design-system/shadcn/<nome>`; a API é a do shadcn." } } },
   decorators: [(Story) => <div className="flex max-w-[560px] flex-col gap-4"><Story /></div>],
 };
 export default meta;

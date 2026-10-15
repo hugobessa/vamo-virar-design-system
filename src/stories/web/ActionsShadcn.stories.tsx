@@ -9,7 +9,7 @@ import { Toggle } from "../../shadcn/toggle";
 import { ToggleGroup, ToggleGroupItem } from "../../shadcn/toggle-group";
 
 const meta: Meta = {
-  title: "shadcn/Botões e ações",
+  title: "Web/Botões e ações",
   parameters: {
     layout: "padded",
     docs: {

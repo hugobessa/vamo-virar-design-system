@@ -1,9 +1,10 @@
 /*
  * Precompiled stylesheet for projects that don't run Tailwind: Tailwind's base
- * styles, the Vamo Virar theme and every class the web components use.
+ * styles, the Vamo Virar theme and every class the web and shadcn/ui components use.
  *
  *   import "@vamo-virar/design-system/web/styles.css";
  */
 @import "tailwindcss" source(none);
 @import "./theme.css";
 @source "./";
+@source "../shadcn";

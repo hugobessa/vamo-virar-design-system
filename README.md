@@ -2,13 +2,16 @@
 
 Design system do [Vamo Virar](https://github.com/hugobessa/vamo-virar): cores,
 tipografia, espaçamento e movimento (tokens), as marcas da campanha (caixas,
-estrela, bandeira, logotipo) e os componentes de interface, em duas versões:
+estrela, bandeira, logotipo) e os componentes de interface, em três formas:
 
 - **React Native** (`@vamo-virar/design-system`): para o app (Expo); também
   roda no navegador via `react-native-web`.
 - **Web** (`@vamo-virar/design-system/web`): os mesmos componentes no estilo
   [shadcn/ui](https://ui.shadcn.com) (primitivos Radix + Tailwind CSS), sem
   React Native. Veja [Versão web (shadcn/ui)](#versão-web-shadcnui).
+- **shadcn/ui completo** (`@vamo-virar/design-system/shadcn/<nome>`): todos os
+  componentes do shadcn/ui, com a mesma API, no estilo da campanha. Veja
+  [Componentes shadcn/ui](#componentes-shadcnui).
 
 A identidade segue a campanha: vermelho como cor da marca, com as cores da
 bandeira como detalhe. Como o vermelho também significa "perigo", ele nunca é
@@ -92,7 +95,7 @@ componentes junto com as suas.
 ```css
 @import "tailwindcss";
 @import "@vamo-virar/design-system/web/theme.css";
-@source "../node_modules/@vamo-virar/design-system/dist/web";
+@source "../node_modules/@vamo-virar/design-system/dist";
 ```
 
 **Sem Tailwind**: importe o CSS já compilado (inclui o reset do Tailwind).
@@ -167,6 +170,81 @@ tema em cada elemento, as `--color-*` do Tailwind não.
 O teste `src/web/web.test.ts` confere que `theme.css` tem os mesmos valores de
 `src/tokens.ts`; ao mudar uma cor, mude nos dois.
 
+## Componentes shadcn/ui
+
+Todos os componentes do [shadcn/ui](https://ui.shadcn.com/docs/components),
+um arquivo por componente, como o `@/components/ui/<nome>` do shadcn. Os nomes,
+as partes e as props são os do shadcn, então a documentação e os exemplos
+(blocks) de lá valem aqui: basta trocar o caminho do import.
+
+```tsx
+import { Button } from "@vamo-virar/design-system/shadcn/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@vamo-virar/design-system/shadcn/card";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@vamo-virar/design-system/shadcn/dialog";
+```
+
+Os estilos são os mesmos da versão web (veja [Estilos](#estilos)): o
+`theme.css` com o `@source` apontando para `dist`, ou o `styles.css` compilado.
+
+Componentes: `accordion`, `alert`, `alert-dialog`, `aspect-ratio`, `avatar`,
+`badge`, `breadcrumb`, `button`, `button-group`, `calendar`, `card`,
+`carousel`, `chart`, `checkbox`, `collapsible`, `command`, `context-menu`,
+`dialog`, `drawer`, `dropdown-menu`, `empty`, `field`, `form`, `hover-card`,
+`input`, `input-group`, `input-otp`, `item`, `kbd`, `label`, `menubar`,
+`native-select`, `navigation-menu`, `pagination`, `popover`, `progress`,
+`radio-group`, `resizable`, `scroll-area`, `select`, `separator`, `sheet`,
+`sidebar`, `skeleton`, `slider`, `sonner`, `spinner`, `switch`, `table`,
+`tabs`, `textarea`, `toggle`, `toggle-group`, `tooltip`, e o hook
+`use-mobile`. Combobox e seletor de data são padrões montados com esses
+componentes (há exemplos no Storybook); a tabela de dados do shadcn é a `table`
+com `@tanstack/react-table`. O antigo `toast` do shadcn foi substituído pelo
+`sonner`.
+
+### Dependências opcionais
+
+Os componentes que usam Radix já vêm com o pacote. Estes precisam de uma
+biblioteca a mais, instalada só por quem usar o componente:
+
+| Componente | Instale |
+| --- | --- |
+| `calendar` | `react-day-picker` (9.x) |
+| `carousel` | `embla-carousel-react` |
+| `chart` | `recharts` (3.x) |
+| `command` | `cmdk` |
+| `drawer` | `vaul` |
+| `form` | `react-hook-form` |
+| `input-otp` | `input-otp` |
+| `resizable` | `react-resizable-panels` (3.x) |
+| `sonner` | `sonner` |
+
+### O que muda em relação ao shadcn padrão
+
+- **Cores**: as variáveis do shadcn vêm dos tokens da campanha. `primary` é o
+  azul; vermelho nunca é fundo de ação.
+- **Botão**: `default` (azul) e o extra `accent` (amarelo) têm a borda de
+  profundidade de 3px e afundam ao pressionar, como no app; `destructive` é
+  contorno em vermelho escuro, e `outline` também tem a borda. Tamanhos com
+  alvo de toque maior: 48px (`default`), 40px (`sm`), 56px (`lg`).
+- **Campos** (`input`, `select`, `textarea`, `input-otp`, `input-group`): 48px
+  de altura, texto de 17px e anel azul no foco, como o `Field` do app.
+- **Marca**: `Badge variant="brand"` é a etiqueta inclinada vermelha da
+  campanha; `Card accent` e `Item variant="accent"` ganham a borda vermelha à
+  esquerda; `EmptyMedia variant="icon"` é uma caixa amarela inclinada; o item
+  ativo da `sidebar` tem a borda vermelha; o `progress` é a barra inclinada
+  verde; `FieldLegend` tem a barrinha vermelha do `FormSection`.
+- **Tipografia**: títulos da `accordion`, do `calendar` e cabeçalhos de
+  `table`, menus e grupos da `sidebar` usam a fonte de display em maiúsculas,
+  como o `GroupHeading` do app. A `accordion` usa o "+" azul que vira "×",
+  como o `Collapsible`.
+- **Gráficos**: `--chart-1` a `--chart-5` são azul, verde e amarelo da
+  bandeira, depois o vermelho e o roxo da campanha.
+- **Textos** em português (rótulos de leitores de tela, `calendar` em pt-BR
+  por padrão; passe `locale` para trocar).
+- **Movimento**: animações respeitam a preferência de menos movimento
+  (`motion-off:`), e a `sidebar` tem 280px, a mesma largura do app.
+- **Tema escuro**: como no shadcn, a classe `.dark` vai no `<html>`, para que
+  diálogos e menus (renderizados no fim do `<body>`) também fiquem escuros.
+
 ## Storybook
 
 Publicado em https://hugobessa.github.io/vamo-virar-design-system/ a cada
@@ -179,7 +257,8 @@ npm run build-storybook  # versão estática em dist-storybook
 ```
 
 A barra de ferramentas troca o tema (claro/escuro) e simula a preferência de
-menos movimento. Os componentes da versão web ficam na seção "Web". As telas do app, montadas com estes componentes, continuam
+menos movimento. Os componentes da versão web ficam na seção "Web", e os do
+shadcn/ui na seção "shadcn". As telas do app, montadas com estes componentes, continuam
 no Storybook do [repositório do app](https://github.com/hugobessa/vamo-virar),
 em "Telas", como exemplos de uso.
 

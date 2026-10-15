@@ -5,7 +5,7 @@
  *
  *   @import "tailwindcss";
  *   @import "@vamo-virar/design-system/web/theme.css";
- *   @source "../node_modules/@vamo-virar/design-system/dist/web";
+ *   @source "../node_modules/@vamo-virar/design-system/dist";
  *
  * The values mirror src/tokens.ts (a unit test keeps them in step). On top of
  * the brand tokens (--vv-*), it fills in shadcn's variables (--background,
@@ -14,6 +14,9 @@
  * Colour scheme: light by default, dark when the system asks for it, and a
  * `.dark` or `.light` class forces either for its subtree (shadcn convention).
  */
+
+/* Enter/exit animation utilities the shadcn/ui components use (animate-in, fade-in-0, ...). */
+@import "tw-animate-css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -148,6 +151,22 @@
   --border: var(--vv-border);
   --input: var(--vv-border);
   --ring: var(--vv-focus);
+
+  /* Charts take the flag first (blue, green, yellow), then the campaign red and purple. */
+  --chart-1: var(--vv-primary);
+  --chart-2: var(--vv-green);
+  --chart-3: var(--vv-accent);
+  --chart-4: var(--vv-brand);
+  --chart-5: var(--vv-focus);
+
+  --sidebar: var(--vv-surface);
+  --sidebar-foreground: var(--vv-text);
+  --sidebar-primary: var(--vv-primary);
+  --sidebar-primary-foreground: var(--vv-primary-text);
+  --sidebar-accent: var(--vv-chip);
+  --sidebar-accent-foreground: var(--vv-text);
+  --sidebar-border: var(--vv-border);
+  --sidebar-ring: var(--vv-focus);
 }
 
 @theme inline {
@@ -169,6 +188,19 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 
   /* Brand tokens that shadcn has no name for. */
   --color-surface: var(--vv-surface);
@@ -234,6 +266,7 @@
   --animate-vv-dialog-in: vv-dialog-in 200ms cubic-bezier(0.2, 0, 0, 1) both;
   --animate-vv-dialog-out: vv-dialog-out 200ms cubic-bezier(0.2, 0, 0, 1) both;
   --animate-vv-star: vv-star 800ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
 
   @keyframes vv-enter {
     from {
@@ -279,6 +312,17 @@
       transform: scale(0.96);
     }
   }
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
   @keyframes vv-star {
     0% {
       opacity: 1;
@@ -300,5 +344,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

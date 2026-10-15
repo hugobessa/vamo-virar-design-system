@@ -245,6 +245,41 @@ biblioteca a mais, instalada só por quem usar o componente:
 - **Tema escuro**: como no shadcn, a classe `.dark` vai no `<html>`, para que
   diálogos e menus (renderizados no fim do `<body>`) também fiquem escuros.
 
+## Layouts de página
+
+Esqueletos prontos, feitos com os componentes do shadcn/ui, em
+`@vamo-virar/design-system/layouts/<nome>`:
+
+| Arquivo | O que é |
+| --- | --- |
+| `sidebar-layout` | `SidebarLayout`: menu lateral com seções (vira gaveta no celular e encolhe para ícones com ⌘/Ctrl+B), cabeçalho fixo com título e ações. `width="contained"` centraliza o corpo em 1040px; `width="fluid"` ocupa a janela toda (quadros, tabelas, mapas). |
+| `top-nav-layout` | `TopNavLayout`: barra superior contida (marca, links, ações) e corpo contido; no celular os links vão para um menu lateral. Use uma marca compacta, como `<BrandBox size="sm">Vamo virar</BrandBox>`. |
+| `nav-user` | `SidebarUser` (rodapé do menu lateral) e `UserButton` (avatar da barra superior), com o menu da pessoa e "Sair". |
+| `auth-layout` | `AuthLayout`: moldura das páginas de entrada. `split` põe o painel vermelho da marca ao lado do formulário; `centered` põe o formulário num cartão. |
+| `auth-forms` | `LoginForm`, `SignUpForm`, `ForgotPasswordForm` e `ResetPasswordForm`, com `onSubmit`, `error` e `busy`. |
+| `verify-code-form` | `VerifyCodeForm`: código de 6 dígitos (precisa de `input-otp`). |
+
+```tsx
+import { SidebarLayout } from "@vamo-virar/design-system/layouts/sidebar-layout";
+import { SidebarUser } from "@vamo-virar/design-system/layouts/nav-user";
+import { Wordmark } from "@vamo-virar/design-system/web";
+import Link from "next/link";
+import { Home, Users } from "lucide-react";
+
+<SidebarLayout
+  brand={<Wordmark size="sm" />}
+  sections={[{ items: [{ title: "Painel", href: "/", icon: Home, isActive: true }, { title: "Pessoas", href: "/pessoas", icon: Users, badge: 3 }] }]}
+  footer={<SidebarUser user={{ name: "Ana Souza", email: "ana@exemplo.com" }} onSignOut={sair} />}
+  title="Painel"
+  linkAs={Link}
+>
+  …
+</SidebarLayout>
+```
+
+O Storybook mostra cada layout com um exemplo (painel, quadro de ações e as
+páginas de entrada) em "Web/Layouts".
+
 ## Storybook
 
 Publicado em https://hugobessa.github.io/vamo-virar-design-system/ a cada

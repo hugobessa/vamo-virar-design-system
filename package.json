@@ -1,6 +1,6 @@
 {
   "name": "@vamo-virar/design-system",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "description": "Vamo Virar design system: colour, type and motion tokens, brand marks and UI components for React Native (web via react-native-web), for the web (Radix + Tailwind CSS), and every shadcn/ui component in the campaign's style.",
   "license": "MIT",
   "repository": {

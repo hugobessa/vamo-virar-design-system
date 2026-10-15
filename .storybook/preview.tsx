@@ -5,6 +5,19 @@ import { ReducedMotionOverride, SchemeOverride, themes } from "../src/theme";
 import { ReducedMotionOverride as WebReducedMotionOverride } from "../src/web/theme";
 import "./tailwind.css";
 
+/**
+ * Mirrors the toolbar's scheme onto <html> (shadcn's convention), so dialogs,
+ * menus and toasts portalled to the end of <body> take the scheme too.
+ */
+function SchemeClass({ scheme }: { scheme: "light" | "dark" }) {
+  useEffect(() => {
+    const root = document.documentElement.classList;
+    root.remove("light", "dark");
+    root.add(scheme);
+  }, [scheme]);
+  return null;
+}
+
 /** Mirrors the toolbar's motion choice onto <html>, for CSS animations that read it. */
 function MotionFlag({ on }: { on: boolean }) {
   useEffect(() => {
@@ -58,6 +71,7 @@ const preview: Preview = {
           <ReducedMotionOverride.Provider value={reduced}>
             <WebReducedMotionOverride.Provider value={reduced}>
               <MotionFlag on={!reduced} />
+              <SchemeClass scheme={scheme} />
               {/* The web kit reads the scheme from a .light/.dark class and less motion from data-reduced-motion. */}
               <div className={scheme} data-reduced-motion={reduced ? "true" : undefined}>
                 <View style={{ minHeight: "100vh" as unknown as number, backgroundColor: ctx.parameters["transparent"] ? "transparent" : themes[scheme].bg }}>
